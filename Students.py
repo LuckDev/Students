@@ -1,36 +1,34 @@
 from statistics import mean
 from sys import exit
 
-
-def delete_student(dic):
-    names = list(dic.keys())
-    if len(names):
-        print(names)
-        student = input("Which student would you like to delete?\n")
-        if student in names:
-            del dic[student]
+def DeleteStudent(dic):
+    studentNames = list(dic.keys())
+    if len(studentNames):
+        print(studentNames)
+        aStudent = input("Which student would you like to delete?\n")
+        if aStudent in studentNames:
+            del dic[aStudent]
         else:
             print("Error #404: Student not found")
     else:
         print("No students in database")
 
-
-def input_grades(dic):
-    names = list(dic.keys())
-    if len(names):
-        print(names)
-        student = input("Whose grades would you like to enter?\n")
-        if student not in names:
+def InputGrades(dic):
+    studentNames = list(dic.keys())
+    if len(studentNames):
+        print(studentNames)
+        aStudent = input("Whose grades would you like to enter?\n")
+        if aStudent not in studentNames:
             print("Error #404: Student not found")
             return
         else:
             print("Input grades, each in their own line.\nType '0' when done\n")
-            grade = int(input())
-            dic[student] = []
-            while grade:
+            studentGrade = int(input())
+            dic[aStudent] = []
+            while studentGrade:
                 try:
-                    if 1 <= grade <= 5:
-                        dic[student].append(grade)
+                    if 1 <= studentGrade <= 5:
+                        dic[aStudent].append(studentGrade)
                     else:
                         print("Grades are numbers 1-5, please try again")
                     grade = int(input())
@@ -39,15 +37,14 @@ def input_grades(dic):
     else:
         print("No students in database")
 
-
-def calculate_average(dic):
-    names = list(dic.keys())
-    if len(names):
-        print(names)
-        student = input("Whose grade average would you like?\n")
-        if student in names:
-            if mean(dic[student]):
-                print(mean(dic[student]))
+def CalculateAverage(dic):
+    studentNames = list(dic.keys())
+    if len(studentNames):
+        print(studentNames)
+        aStudent = input("Whose grade average would you like?\n")
+        if aStudent in studentNames:
+            if mean(dic[aStudent]):
+                print(mean(dic[aStudent]))
             else:
                 print("No grades")
         else:
@@ -55,22 +52,21 @@ def calculate_average(dic):
     else:
         print("No students in database")
 
-
-def input_student(dic):
-    new = input("Enter student name\n")
-    if new in dic:
+def InputStudent(dic):
+    newStudent = input("Enter student name\n")
+    if newStudent in dic:
         print("Student already in database")
     else:
-        dic[new] = [0]
+        dic[newStudent] = [0]
 
 
-def print_students(dic):
-    names = list(dic.keys())
-    if len(names):
-        for i in range(len(names)):
-            print(names[i], '- ', end='')
-            if mean(dic[names[i]]):
-                print(dic[names[i]])
+def PrintStudents(dic):
+    studentNames = list(dic.keys())
+    if len(studentNames):
+        for i in range(len(studentNames)):
+            print(studentNames[i], '- ', end='')
+            if mean(dic[studentNames[i]]):
+                print(dic[studentNames[i]])
             else:
                 print("no grades")
     else:
@@ -78,7 +74,7 @@ def print_students(dic):
 
 
 rj = {'Mark': [1, 1, 3, 5, 3], 'John': [4, 2], 'Paul': [1, 2, 3, 3], 'Mike': [3], 'Anthony': [1, 5, 4, 4, 3, 2, 1]}
-menu = 0
+menuChoice = 0
 
 while True:
     print("************Students************\n"
@@ -89,18 +85,18 @@ while True:
           "[5]-enter a student's grades\n"
           "[6]-exit\n"
           "********************************")
-    menu = input()
-    if menu == '1':
-        input_student(rj)
-    elif menu == '2':
-        delete_student(rj)
-    elif menu == '3':
-        print_students(rj)
-    elif menu == '4':
-        calculate_average(rj)
-    elif menu == '5':
-        input_grades(rj)
-    elif menu == '6':
+    menuChoice = input()
+    if menuChoice == '1':
+        InputStudent(rj)
+    elif menuChoice == '2':
+        DeleteStudent(rj)
+    elif menuChoice == '3':
+        PrintStudents(rj)
+    elif menuChoice == '4':
+        CalculateAverage(rj)
+    elif menuChoice == '5':
+        InputGrades(rj)
+    elif menuChoice == '6':
         exit()
     else:
         print('Error: try again')
